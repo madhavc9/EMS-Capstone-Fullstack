@@ -1,0 +1,564 @@
+{
+	"info": {
+		"_postman_id": "fe401d33-14bd-4248-a54e-c57b82540eb9",
+		"name": "EMS Microservice with API Gateway",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "30909969"
+	},
+	"item": [
+		{
+			"name": "Employee Service",
+			"item": [
+				{
+					"name": "Login",
+					"item": [
+						{
+							"name": "Admin Login",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"username\":\"admin\",\n    \"password\":\"admin123\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9000/ems/auth/admin/login",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9000",
+									"path": [
+										"ems",
+										"auth",
+										"admin",
+										"login"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "User Login",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"username\":\"user1\",\n    \"password\":\"user123\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9000/ems/auth/user/login",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9000",
+									"path": [
+										"ems",
+										"auth",
+										"user",
+										"login"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create User (Admin)",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"username\":\"admin10\",\n    \"password\":\"pass10\",\n    \"role\":\"ADMIN\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9000/ems/auth/create-user",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9000",
+									"path": [
+										"ems",
+										"auth",
+										"create-user"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Forgot Password",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"securityKey\":\"2004\",\n    \"newPassword\":\"kaushal123\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9000/ems/api/employees/forgot-password",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9000",
+									"path": [
+										"ems",
+										"api",
+										"employees",
+										"forgot-password"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "CRUD",
+					"item": [
+						{
+							"name": "Get All Employees",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:9000/ems/api/employees",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9000",
+									"path": [
+										"ems",
+										"api",
+										"employees"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Employee By ID",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:9000/ems/api/employees/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9000",
+									"path": [
+										"ems",
+										"api",
+										"employees",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Add Employee",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsInJvbGUiOiJBRE1JTiIsImVtcGxveWVlSWQiOjEsImlhdCI6MTc2NDM1Mzg4NSwiZXhwIjoxNzY0MzcxODg1fQ.YnQ_a7L8HVmI7_RB88Xs7I_X7p_aEr_IQn-iLrq83Fo",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"name\": \"Test user\",\n  \"email\": \"test6@example.com\",\n  \"designation\": \"Software Consultant\",\n  \"salary\": 75000.00,\n  \"birthDate\": \"2003-06-18\",\n  \"role\": \"Buiseness\"\n}\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9000/ems/api/employees",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9000",
+									"path": [
+										"ems",
+										"api",
+										"employees"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update Employee",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsInJvbGUiOiJBRE1JTiIsImVtcGxveWVlSWQiOjEsImlhdCI6MTc2NDM1Mzg4NSwiZXhwIjoxNzY0MzcxODg1fQ.YnQ_a7L8HVmI7_RB88Xs7I_X7p_aEr_IQn-iLrq83Fo",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"id\": 3,\n  \"name\": \"Madhav\",\n  \"email\": \"madhav@example.com\",\n  \"designation\": \"ML Engineer\",\n  \"salary\": 85000.00,\n  \"role\": \"ENGINEER\",\n  \"birthDate\": \"2004-09-18\"\n}\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9000/ems/api/employees/3",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9000",
+									"path": [
+										"ems",
+										"api",
+										"employees",
+										"3"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Employee",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsInJvbGUiOiJBRE1JTiIsImVtcGxveWVlSWQiOjEsImlhdCI6MTc2NDM1Mzg4NSwiZXhwIjoxNzY0MzcxODg1fQ.YnQ_a7L8HVmI7_RB88Xs7I_X7p_aEr_IQn-iLrq83Fo",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9000/ems/api/employees/2",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9000",
+									"path": [
+										"ems",
+										"api",
+										"employees",
+										"2"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Profile",
+					"item": [
+						{
+							"name": "Get My Profile",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:9000/ems/api/profile/me",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9000",
+									"path": [
+										"ems",
+										"api",
+										"profile",
+										"me"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Home",
+					"item": [
+						{
+							"name": "Stats",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:9000/ems/api/employees/stats",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9000",
+									"path": [
+										"ems",
+										"api",
+										"employees",
+										"stats"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Experience Service",
+			"item": [
+				{
+					"name": "Admin Only",
+					"item": [
+						{
+							"name": "Add Experience",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:9000/experience/api/experience",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9000",
+									"path": [
+										"experience",
+										"api",
+										"experience"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Experience By Employee ID",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:9000/experience/api/experience/employee/{id}",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9000",
+									"path": [
+										"experience",
+										"api",
+										"experience",
+										"employee",
+										"{id}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Experience",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:9000/experience/api/experience/{id}",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9000",
+									"path": [
+										"experience",
+										"api",
+										"experience",
+										"{id}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Summary For Any Employee",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:9000/experience/api/experience/summary/{id}",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9000",
+									"path": [
+										"experience",
+										"api",
+										"experience",
+										"summary",
+										"{id}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update Experience",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:9000/experience/api/experience/{id}",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9000",
+									"path": [
+										"experience",
+										"api",
+										"experience",
+										"{id}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Filter Experience",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:9000/experience/api/experience/filter",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9000",
+									"path": [
+										"experience",
+										"api",
+										"experience",
+										"filter"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get All Experience",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:9000/experience/api/experience",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9000",
+									"path": [
+										"experience",
+										"api",
+										"experience"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Get My Experience",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9000/experience/api/experience/me",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9000",
+							"path": [
+								"experience",
+								"api",
+								"experience",
+								"me"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get My Experience Summary",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9000/experience/api/experience/summary/me",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9000",
+							"path": [
+								"experience",
+								"api",
+								"experience",
+								"summary",
+								"me"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

@@ -1,0 +1,47 @@
+package com.example.EMS_API_Gateway;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.reactive.CorsWebFilter;
+import org.springframework.web.cors.reactive.UrlBasedCorsConfigurationSource;
+
+import java.util.Arrays;
+import java.util.Collections;
+
+@SpringBootApplication
+class EmsApiGatewayApplication {
+
+	public static void main(String[] args) {
+		SpringApplication.run(EmsApiGatewayApplication.class, args);
+	}
+   // cors
+	@Bean
+	public CorsWebFilter corsWebFilter() {
+		CorsConfiguration corsConfig = new CorsConfiguration();
+		
+		
+		corsConfig.setAllowedOrigins(Arrays.asList(
+			"http://localhost:3000", 
+			"https://main.d15ztt0s52f8f4.amplifyapp.com/"
+		));
+		
+		
+		corsConfig.setMaxAge(3600L); 
+		corsConfig.addAllowedMethod("*");
+		
+		
+		corsConfig.addAllowedHeader("*");
+		
+		
+		corsConfig.setAllowCredentials(true);
+
+		UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+		source.registerCorsConfiguration("/**", corsConfig);
+
+		return new CorsWebFilter(source);
+
+		
+	}
+}
