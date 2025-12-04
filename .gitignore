@@ -13,10 +13,6 @@ dist/
 # === ENV / SECRETS (DO NOT PUSH TO GITHUB!) ===
 .env
 *.env
-application.properties
-application.yml
-application-dev.properties
-application-prod.properties
 
 # === OS FILES ===
 .DS_Store
