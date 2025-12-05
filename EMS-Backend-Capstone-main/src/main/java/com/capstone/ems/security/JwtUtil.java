@@ -1,10 +1,10 @@
 package com.capstone.ems.security;
 
-import io.github.cdimascio.dotenv.Dotenv;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import java.security.Key;
@@ -13,18 +13,19 @@ import java.util.Date;
 @Component
 public class JwtUtil {
 
-    private final Dotenv dotenv = Dotenv.load();
+    private final String secret;
+    private final long expirationMs;
 
-    // Load secret key from .env file
-    private final String SECRET = dotenv.get("JWT_SECRET");
-
-    // Load expiration if needed, else default 5 hours
-    private final long EXPIRATION_MS = Long.parseLong(
-            dotenv.get("JWT_EXPIRATION_MS", "18000000") // default 5 hours = 18,000,000 ms
-    );
+    public JwtUtil(
+            @Value("${JWT_SECRET}") String secret,
+            @Value("${JWT_EXPIRATION_MS:18000000}") long expirationMs  // Default: 5 hours
+    ) {
+        this.secret = secret;
+        this.expirationMs = expirationMs;
+    }
 
     private Key getSigningKey() {
-        return Keys.hmacShaKeyFor(SECRET.getBytes());
+        return Keys.hmacShaKeyFor(secret.getBytes());
     }
 
     public String generateToken(String username, String role, Long employeeId) {
@@ -33,7 +34,7 @@ public class JwtUtil {
                 .claim("role", role)
                 .claim("employeeId", employeeId)
                 .setIssuedAt(new Date(System.currentTimeMillis()))
-                .setExpiration(new Date(System.currentTimeMillis() + EXPIRATION_MS))
+                .setExpiration(new Date(System.currentTimeMillis() + expirationMs))
                 .signWith(getSigningKey(), SignatureAlgorithm.HS256)
                 .compact();
     }
@@ -71,8 +72,7 @@ public class JwtUtil {
             if (isTokenExpired(token)) {
                 return false;
             }
-
-            extractUsername(token);
+            extractUsername(token); // Ensures token is parseable
             return true;
         } catch (Exception e) {
             return false;

@@ -1,9 +1,9 @@
 package com.capstone.experience.security;
 
-import io.github.cdimascio.dotenv.Dotenv;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import java.security.Key;
@@ -12,13 +12,14 @@ import java.util.Date;
 @Component
 public class JwtUtil {
 
-    private final Dotenv dotenv = Dotenv.load();
-    private final String SECRET = dotenv.get("JWT_SECRET");
-	
-	//private final String SECRET ="mysupersecretjwtkey_1234567890_secure";
+    private final String secret;
+
+    public JwtUtil(@Value("${JWT_SECRET}") String secret) {
+        this.secret = secret;
+    }
 
     private Key getSigningKey() {
-        return Keys.hmacShaKeyFor(SECRET.getBytes());
+        return Keys.hmacShaKeyFor(secret.getBytes());
     }
 
     private Claims extractAllClaims(String token) {
@@ -53,7 +54,7 @@ public class JwtUtil {
     public boolean isTokenValid(String token) {
         try {
             if (isTokenExpired(token)) return false;
-            extractUsername(token); // force parse
+            extractUsername(token); // force valid parse
             return true;
         } catch (Exception e) {
             return false;
