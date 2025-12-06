@@ -1,23 +1,22 @@
 -- ================================
--- V1 - Initial Database Schema
+-- V1 - Initial Database Schema (PostgreSQL)
 -- ================================
 
 -- Employees Table
 CREATE TABLE IF NOT EXISTS employees (
-    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    id BIGSERIAL PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
     email VARCHAR(100) NOT NULL UNIQUE,
     designation VARCHAR(100) NOT NULL,
-    salary DECIMAL(10,2) NOT NULL,
-    birth_date DATE NOT NULL,          -- <--- ADDED HERE
-    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-    updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+    salary NUMERIC(10,2) NOT NULL,
+    birth_date DATE NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
-
 
 -- Users Table
 CREATE TABLE IF NOT EXISTS users (
-    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    id BIGSERIAL PRIMARY KEY,
     username VARCHAR(100) NOT NULL UNIQUE,
     password_hash VARCHAR(255) NOT NULL,
     role VARCHAR(20) NOT NULL,

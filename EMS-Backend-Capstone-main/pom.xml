@@ -127,6 +127,14 @@
             <scope>test</scope>
         </dependency>
 
+        <!-- Remove mysql-connector-java or keep only for local use if needed -->
+        <!-- Add PostgreSQL driver -->
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <version>42.6.0</version> 
+        </dependency>
+
     </dependencies>
 
     <build>
